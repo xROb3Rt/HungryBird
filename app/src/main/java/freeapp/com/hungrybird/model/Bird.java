@@ -3,7 +3,7 @@ package freeapp.com.hungrybird.model;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-
+import android.graphics.Rect;
 import freeapp.com.hungrybird.R;
 
 public class Bird {
@@ -17,19 +17,23 @@ public class Bird {
     int maxY, minY;
     int velocidad = 0;
     boolean movimiento;
+    Rect detectCollision;
 
 
     public Bird(Context context, int pantallaX, int pantallaY) {
         x = 75;
         y = 50;
         velocidad = 1;
-        
+
         bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.jugador);
 
         maxY = pantallaY - bitmap.getHeight();
         minY = 0;
 
         movimiento = false;
+
+        detectCollision =  new Rect(x, y, bitmap.getWidth(), bitmap.getHeight());
+
     }
 
     public void moverJugador() {
@@ -54,6 +58,15 @@ public class Bird {
         if (y < minY) { y = minY; }
         if (y > maxY) { y = maxY; }
 
+        detectCollision.left = x;
+        detectCollision.top = y;
+        detectCollision.right = x + bitmap.getWidth();
+        detectCollision.bottom = y + bitmap.getHeight();
+
+    }
+
+    public Rect getDetectCollision() {
+        return detectCollision;
     }
 
     public Bitmap getBitmap() {

@@ -5,12 +5,17 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.Rect;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.widget.Toast;
 
+import java.util.Random;
 import freeapp.com.hungrybird.R;
 import freeapp.com.hungrybird.model.Bird;
+import freeapp.com.hungrybird.model.Fruit;
 
 public class GameView extends SurfaceView implements Runnable {
 
@@ -20,17 +25,27 @@ public class GameView extends SurfaceView implements Runnable {
     Canvas canvas;
     Bird jugador;
     Bitmap fondo;
+    Fruit[] frutas;
+    Random r;
 
     volatile boolean playing;
 
     public GameView(Context context, int pantallaX, int pantallaY) {
         super(context);
 
+
+
         fondo = BitmapFactory.decodeResource(getResources(), R.drawable.background);
 
         jugador = new Bird(context, pantallaX, pantallaY);
         surfaceHolder = getHolder();
         paint = new Paint();
+
+        frutas = new Fruit[3];
+        for(int i=0; i<3; i++){
+            frutas[i] = new Fruit(context, pantallaX, pantallaY);
+        }
+
 
     }
 
@@ -46,6 +61,14 @@ public class GameView extends SurfaceView implements Runnable {
 
     private void actualizar() {
         jugador.actualizarPosicion();
+
+        for(int i=0; i<3; i++) {
+            frutas[i].actualizar(jugador.getVelocidad());
+
+            if (Rect.intersects(jugador.getDetectCollision(), frutas[i].getDetectCollision())) {
+                frutas[i].setX(-200);
+            }
+        }
     }
 
     private void dibujar() {
@@ -54,14 +77,21 @@ public class GameView extends SurfaceView implements Runnable {
             canvas = surfaceHolder.lockCanvas();
             canvas.drawBitmap(fondo, 0, 0, null);
             canvas.drawBitmap(jugador.getBitmap(), jugador.getX(), jugador.getY(), paint);
+
+
+            for (int i = 0; i < 3; i++) {
+                canvas.drawBitmap(frutas[i].getBitmap(), frutas[i].getX(), frutas[i].getY(), paint);
+            }
+
             surfaceHolder.unlockCanvasAndPost(canvas);
         }
+
 
     }
 
     private void control() {
         try {
-            threadJuego.sleep(17);
+            threadJuego.sleep(15);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

@@ -5,6 +5,7 @@ import android.graphics.Point;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Display;
+import android.widget.Toast;
 
 public class GameActivity extends AppCompatActivity {
 
@@ -20,9 +21,10 @@ public class GameActivity extends AppCompatActivity {
 
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 
-        gameView = new GameView(this, size.x, size.y);
-        setContentView(gameView);
 
+        gameView = new GameView(this, size.x, size.y);
+
+        setContentView(gameView);
     }
 
     @Override
