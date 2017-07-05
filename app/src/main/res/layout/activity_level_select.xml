@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    tools:context="freeapp.com.hungrybird.LevelsActivity">
+
+    <ImageButton
+        android:id="@+id/btnInfinito"
+        android:background="@drawable/playgame"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="39dp"
+        android:layout_above="@+id/btnContraReloj"
+        android:layout_centerHorizontal="true" />
+
+    <ImageButton
+        android:id="@+id/btnContraReloj"
+        android:background="@drawable/playgame"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="19dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/btnInfinito" />
+
+</RelativeLayout>
