@@ -46,15 +46,16 @@ public class GameView extends SurfaceView implements Runnable {
     public GameView(Context context, int pantallaX, int pantallaY) {
         super(context);
 
-        jugador = new Bird(context, pantallaX, pantallaY);
-        surfaceHolder = getHolder();
-        paint = new Paint();
         this.pantallaX = pantallaX;
         this.context = context;
+        surfaceHolder = getHolder();
+        paint = new Paint();
         contador = 0;
         gameOver = false;
         score = 0;
 
+
+        jugador = new Bird(context, pantallaX, pantallaY);
 
         frutas = new Fruit[2];
         for(int i=0; i<2; i++){
@@ -62,7 +63,7 @@ public class GameView extends SurfaceView implements Runnable {
         }
 
         enemigo = new Enemigo(context, pantallaX, pantallaY);
-        fondo = new Fondo(context);
+        fondo = new Fondo(context, pantallaX, pantallaY);
 
         sharedPreferences = context.getSharedPreferences("highScore",Context.MODE_PRIVATE);
         highScore[0] = sharedPreferences.getInt("score1",0);
@@ -135,7 +136,6 @@ public class GameView extends SurfaceView implements Runnable {
         if(Rect.intersects(jugador.getDetectCollision(),enemigo.getDetectCollision())){
             playing = false;
             gameOver = true;
-
             musicaFondo.stop();
             sonidoGameOver.start();
 

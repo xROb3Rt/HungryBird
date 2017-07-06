@@ -10,9 +10,10 @@ public class Fondo {
 
     Bitmap bitmap;
 
-    public Fondo(Context context) {
+    public Fondo(Context context, int pantallaWidth, int pantallaHeight) {
 
         bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.fondo);
+        bitmap = Bitmap.createScaledBitmap(bitmap, pantallaWidth, pantallaHeight, false);
 
     }
 

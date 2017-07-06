@@ -1,9 +1,6 @@
 package freeapp.com.hungrybird.framework;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Point;
 import android.media.AudioManager;
@@ -23,11 +20,8 @@ public class GameActivity extends Activity {
         display.getSize(size);
 
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-
         gameView = new GameView(this, size.x, size.y);
-
         setVolumeControlStream(AudioManager.STREAM_MUSIC);
-
         setContentView(gameView);
     }
 
