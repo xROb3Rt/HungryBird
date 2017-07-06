@@ -1,15 +1,18 @@
 package freeapp.com.hungrybird.framework;
 
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Point;
-import android.support.v7.app.AppCompatActivity;
+import android.media.AudioManager;
 import android.os.Bundle;
 import android.view.Display;
-import android.widget.Toast;
 
-public class GameActivity extends AppCompatActivity {
+public class GameActivity extends Activity {
 
-    private GameView gameView;
+    GameView gameView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,8 +24,9 @@ public class GameActivity extends AppCompatActivity {
 
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 
-
         gameView = new GameView(this, size.x, size.y);
+
+        setVolumeControlStream(AudioManager.STREAM_MUSIC);
 
         setContentView(gameView);
     }
@@ -38,4 +42,9 @@ public class GameActivity extends AppCompatActivity {
         super.onResume();
         gameView.onResume();
     }
+
+
+    @Override
+    public void onBackPressed(){}
+
 }

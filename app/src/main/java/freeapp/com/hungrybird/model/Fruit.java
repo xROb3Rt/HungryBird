@@ -22,11 +22,10 @@ public class Fruit {
     int x, y;
     int maxX, minX;
     int maxY, minY;
-
     int velocidad = 1;
     int aleatorio;
-    Random r;
 
+    Random r;
     Rect detectCollision;
 
 
