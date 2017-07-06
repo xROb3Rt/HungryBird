@@ -11,29 +11,27 @@ import freeapp.com.hungrybird.R;
 
 public class Enemigo {
 
-    private Bitmap bitmap;
-    private int x;
-    private int y;
-    private int speed = 1;
+    Bitmap bitmap;
+    int x, y;
+    int velocidad = 1;
+    int maxX, minX;
+    int maxY, minY;
+    Rect detectCollision;
+    Random r;
 
-    private int maxX;
-    private int minX;
+    public Enemigo(Context context, int pantallaX, int pantallaY) {
 
-    private int maxY;
-    private int minY;
-
-    private Rect detectCollision;
-
-    public Enemigo(Context context, int screenX, int screenY) {
         bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.missile);
-        maxX = screenX;
-        maxY = screenY;
+
+        maxX = pantallaX;
+        maxY = pantallaY;
         minX = 0;
         minY = 0;
-        Random generator = new Random();
-        speed = generator.nextInt(6) + 10;
-        x = screenX;
-        y = generator.nextInt(maxY) - bitmap.getHeight();
+
+        r = new Random();
+        velocidad = r.nextInt(5) + 10;
+        x = pantallaX;
+        y = r.nextInt(maxY) - bitmap.getHeight();
 
         detectCollision = new Rect(x, y, bitmap.getWidth(), bitmap.getHeight());
 
@@ -41,12 +39,12 @@ public class Enemigo {
 
     public void actualizar(int velocidadJugador) {
         x -= velocidadJugador;
-        x -= speed;
+        x -= velocidad;
         if (x < minX - bitmap.getWidth()) {
-            Random generator = new Random();
-            speed = generator.nextInt(10) + 10;
+            r = new Random();
+            velocidad = r.nextInt(10) + 10;
             x = maxX;
-            y = generator.nextInt(maxY) - bitmap.getHeight();
+            y = r.nextInt(maxY) - bitmap.getHeight();
         }
 
         detectCollision.left = x;

@@ -77,7 +77,6 @@ public class Fruit {
 
     }
 
-
     public void setX(int x){
         this.x = x;
     }
@@ -98,8 +97,6 @@ public class Fruit {
         return y;
     }
 
-    public int getVelocidad() {
-        return velocidad;
-    }
+    public int getVelocidad() { return velocidad; }
 
 }

@@ -29,7 +29,4 @@ public class HighScoreActivity extends AppCompatActivity {
         score2.setText("3 - "+sharedPreferences.getInt("score3",0));
 
     }
-
-
-
 }

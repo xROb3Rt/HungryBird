@@ -21,15 +21,15 @@ public class Bird {
 
 
     public Bird(Context context, int pantallaX, int pantallaY) {
+
+        bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.jugador);
+
         x = 75;
         y = 50;
         velocidad = 1;
 
-        bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.jugador);
-
         maxY = pantallaY - bitmap.getHeight();
         minY = 0;
-
         movimiento = false;
 
         detectCollision =  new Rect(x, y, bitmap.getWidth(), bitmap.getHeight());
@@ -46,11 +46,10 @@ public class Bird {
 
     public void actualizarPosicion(){
 
-        if (movimiento) { velocidad += 3; }
-        else { velocidad -= 1; }
+        if (movimiento) { velocidad += 5; }
+        else { velocidad -= 3; }
 
         if (velocidad > MAX_SPEED) { velocidad = MAX_SPEED; }
-
         if (velocidad < MIN_SPEED) { velocidad = MIN_SPEED; }
 
         y -= velocidad + GRAVITY;
@@ -84,4 +83,5 @@ public class Bird {
     public int getVelocidad() {
         return velocidad;
     }
+
 }

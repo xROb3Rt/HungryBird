@@ -20,6 +20,10 @@ import freeapp.com.hungrybird.model.Fruit;
 
 public class GameView extends SurfaceView implements Runnable {
 
+    static MediaPlayer musicaFondo;
+    final MediaPlayer sonidoFruta;
+    final MediaPlayer sonidoGameOver;
+
     Thread threadJuego = null;
     SurfaceHolder surfaceHolder;
     Paint paint;
@@ -39,10 +43,6 @@ public class GameView extends SurfaceView implements Runnable {
 
     SharedPreferences sharedPreferences;
 
-    static MediaPlayer musicaFondo;
-    final MediaPlayer sonidoFruta;
-    final MediaPlayer sonidoGameOver;
-
     public GameView(Context context, int pantallaX, int pantallaY) {
         super(context);
 
@@ -53,7 +53,6 @@ public class GameView extends SurfaceView implements Runnable {
         contador = 0;
         gameOver = false;
         score = 0;
-
 
         jugador = new Bird(context, pantallaX, pantallaY);
 
@@ -104,7 +103,7 @@ public class GameView extends SurfaceView implements Runnable {
                 sonidoFruta.start();
             }else {
                 if (enPantalla) {
-                    if (jugador.getDetectCollision().exactCenterX() >= frutas[i].getDetectCollision().exactCenterX() + 70) {
+                    if (jugador.getDetectCollision().exactCenterX() >= frutas[i].getDetectCollision().exactCenterX() + 100) {
                         contador++;
                         enPantalla = false;
                         if (contador == 5) {
@@ -151,16 +150,20 @@ public class GameView extends SurfaceView implements Runnable {
             canvas.drawBitmap(enemigo.getBitmap(), enemigo.getX(), enemigo.getY(), paint);
 
             paint.setTextSize(50);
-            canvas.drawText("Puntuación: "+score,100,50,paint);
+            canvas.drawText("Score: "+score,100,50,paint);
 
             for (int i = 0; i < 2; i++) {
                 canvas.drawBitmap(frutas[i].getBitmap(), frutas[i].getX(), frutas[i].getY(), paint);
             }
 
             if(gameOver) {
+                canvas.drawBitmap(fondo.getBitmap(), 0, 0, null);
                 paint.setTextSize(150);
                 paint.setTextAlign(Paint.Align.CENTER);
                 canvas.drawText("Game Over", canvas.getWidth() / 2, canvas.getHeight() / 2, paint);
+                paint.setTextSize(70);
+                paint.setTextAlign(Paint.Align.CENTER);
+                canvas.drawText("Press to Return", canvas.getWidth() / 2, canvas.getHeight() / 2 + 150, paint);
             }
 
             surfaceHolder.unlockCanvasAndPost(canvas);

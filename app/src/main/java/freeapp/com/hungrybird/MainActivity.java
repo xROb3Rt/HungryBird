@@ -10,7 +10,6 @@ import android.view.View;
 import android.widget.ImageButton;
 
 import freeapp.com.hungrybird.framework.GameActivity;
-import freeapp.com.hungrybird.framework.GameView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -54,9 +53,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("Are you sure you want to exit?")
+        builder.setMessage("Do you really want to leave?")
                 .setCancelable(false)
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                .setPositiveButton("Yes, exit!", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         Intent startMain = new Intent(Intent.ACTION_MAIN);
                         startMain.addCategory(Intent.CATEGORY_HOME);
@@ -65,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
                         finish();
                     }
                 })
-                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                .setNegativeButton("No, stay!", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         dialog.cancel();
                     }
