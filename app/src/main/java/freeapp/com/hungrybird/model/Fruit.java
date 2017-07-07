@@ -43,6 +43,7 @@ public class Fruit {
         frutas.add(manzana);
         frutas.add(pera);
         frutas.add(platano);
+        
         frutas.add(uva);
 
         maxX = pantallaX;
