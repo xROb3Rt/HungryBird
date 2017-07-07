@@ -11,6 +11,8 @@ import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
+import java.util.Random;
+
 import freeapp.com.hungrybird.MainActivity;
 import freeapp.com.hungrybird.R;
 import freeapp.com.hungrybird.model.Bird;
@@ -40,6 +42,8 @@ public class GameView extends SurfaceView implements Runnable {
     int score;
     int highScore[] = new int[3];
     volatile boolean playing;
+    Random r;
+    int aleatorio;
 
     SharedPreferences sharedPreferences;
 
@@ -75,6 +79,9 @@ public class GameView extends SurfaceView implements Runnable {
 
         musicaFondo.start();
         musicaFondo.setLooping(true);
+
+        r = new Random();
+
     }
 
     @Override
@@ -146,7 +153,8 @@ public class GameView extends SurfaceView implements Runnable {
         if (surfaceHolder.getSurface().isValid()) {
             canvas = surfaceHolder.lockCanvas();
             canvas.drawBitmap(fondo.getBitmap(), 0, 0, null);
-            canvas.drawBitmap(jugador.getBitmap(), jugador.getX(), jugador.getY(), paint);
+            aleatorio = r.nextInt(3);
+            canvas.drawBitmap(jugador.getBitmap(aleatorio), jugador.getX(), jugador.getY(), paint);
             canvas.drawBitmap(enemigo.getBitmap(), enemigo.getX(), enemigo.getY(), paint);
 
             paint.setTextSize(50);

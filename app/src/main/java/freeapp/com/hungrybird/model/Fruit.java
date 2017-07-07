@@ -46,14 +46,14 @@ public class Fruit {
         frutas.add(uva);
 
         maxX = pantallaX;
-        maxY = pantallaY - frutas.get(2).getHeight();
+        maxY = pantallaY;
         minX = 0;
         minY = 0 + frutas.get(2).getHeight();
 
         r = new Random();
         velocidad = r.nextInt(6) + 10;
         x = pantallaX;
-        y = r.nextInt(maxY);
+        y = r.nextInt(maxY) - frutas.get(2).getHeight();
         aleatorio = r.nextInt(5) + 1;
 
         detectCollision = new Rect(x, y, frutas.get(aleatorio).getWidth(), frutas.get(aleatorio).getHeight());

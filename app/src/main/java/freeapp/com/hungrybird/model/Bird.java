@@ -4,6 +4,9 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Rect;
+
+import java.util.ArrayList;
+
 import freeapp.com.hungrybird.R;
 
 public class Bird {
@@ -12,7 +15,10 @@ public class Bird {
     private final int MIN_SPEED = 1;
     private final int MAX_SPEED = 20;
 
-    Bitmap bitmap;
+    Bitmap bitmapPose1;
+    Bitmap bitmapPose2;
+    Bitmap bitmapPose3;
+    ArrayList<Bitmap> animacionJugador = new ArrayList<Bitmap>();
     int x, y;
     int maxY, minY;
     int velocidad = 0;
@@ -22,17 +28,23 @@ public class Bird {
 
     public Bird(Context context, int pantallaX, int pantallaY) {
 
-        bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.jugador);
+        bitmapPose1 = BitmapFactory.decodeResource(context.getResources(), R.drawable.jugador1);
+        bitmapPose2 = BitmapFactory.decodeResource(context.getResources(), R.drawable.jugador2);
+        bitmapPose3 = BitmapFactory.decodeResource(context.getResources(), R.drawable.jugador3);
+
+        animacionJugador.add(bitmapPose1);
+        animacionJugador.add(bitmapPose2);
+        animacionJugador.add(bitmapPose3);
 
         x = 75;
         y = 50;
         velocidad = 1;
 
-        maxY = pantallaY - bitmap.getHeight();
+        maxY = pantallaY - bitmapPose1.getHeight();
         minY = 0;
         movimiento = false;
 
-        detectCollision =  new Rect(x, y, bitmap.getWidth(), bitmap.getHeight());
+        detectCollision =  new Rect(x, y, bitmapPose1.getWidth(), bitmapPose1.getHeight());
 
     }
 
@@ -59,8 +71,8 @@ public class Bird {
 
         detectCollision.left = x;
         detectCollision.top = y;
-        detectCollision.right = x + bitmap.getWidth();
-        detectCollision.bottom = y + bitmap.getHeight();
+        detectCollision.right = x + bitmapPose1.getWidth();
+        detectCollision.bottom = y + bitmapPose1.getHeight();
 
     }
 
@@ -68,10 +80,9 @@ public class Bird {
         return detectCollision;
     }
 
-    public Bitmap getBitmap() {
-        return bitmap;
+    public Bitmap getBitmap(int animacion) {
+        return animacionJugador.get(animacion);
     }
-
     public int getX() {
         return x;
     }
